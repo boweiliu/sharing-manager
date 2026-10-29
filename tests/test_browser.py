@@ -114,7 +114,7 @@ def test_the_qr_code_follows_the_whole_workspace_target(open_page):
     page = open_page(target="workspace")
     page.click("#show-qr")
     assert page.inner_text("#qr-title") == "QR code for the whole workspace"
-    assert decoded(page) == ["https://shell-test.example.test/"]
+    assert decoded(page) == ["https://system_interface-test.example.test/"]
 
 
 def test_every_link_control_is_off_while_sharing_is_off(open_page):

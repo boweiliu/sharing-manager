@@ -17,7 +17,7 @@ REGISTRY = (
     '[[apps]]\nname="notes"\nlabel="notes-test"\n\n'
     '[[apps]]\nname="unlabelled"\ndisplay_name="Unlabelled"\n\n'
     '[[apps]]\nname="owner-exec"\ninternal=true\nlabel="owner-test"\n\n'
-    '[[apps]]\nname="system_interface"\ninternal=true\nlabel="shell-test"\n'
+    '[[apps]]\nname="system_interface"\ninternal=true\nlabel="system_interface-test"\n'
 )
 
 

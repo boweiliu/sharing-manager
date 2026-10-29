@@ -203,7 +203,8 @@ def sharing_state() -> SharingState:
 
 def shared_url(entry: dict, domain: str) -> str | None:
     label = entry.get("label", "")
-    if not domain or not label or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789-." for c in domain + label):
+    # Older workspaces label the shell "system_interface-<id>", so a label may hold an underscore; a domain may not.
+    if not domain or not label or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789-." for c in domain) or any(c not in "abcdefghijklmnopqrstuvwxyz0123456789-_." for c in label):
         return None
     return f"https://{label}.{domain}/"
 

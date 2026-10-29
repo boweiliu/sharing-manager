@@ -37,7 +37,7 @@ def test_workspace_access_is_inherited_and_links_use_registered_labels(isolated)
     client, store = isolated
     state = client.get("/api/sharing", headers=OWNER).json
     assert {t["name"]: t["url"] for t in state["targets"]} == {
-        "workspace": "https://shell-test.example.test/",
+        "workspace": "https://system_interface-test.example.test/",
         "files": "https://files-test.example.test/",
         "notes": "https://notes-test.example.test/",
         "unlabelled": None,
@@ -166,3 +166,8 @@ def test_a_workspace_without_visiting_agents_says_so_instead_of_failing(isolated
     response = client.post("/api/agents/invites", headers=OWNER, json={"scope": "files"})
     assert response.status_code == 501
     assert "not available" in response.json["error"]
+
+
+@pytest.mark.parametrize("label,domain", [("files test", "example.test"), ("files/../x", "example.test"), ("files-test", "example.test/evil"), ("files-test", "Example.test")])
+def test_a_link_is_never_built_from_odd_characters(label, domain):
+    assert runner.shared_url({"label": label}, domain) is None
