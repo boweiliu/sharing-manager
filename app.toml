@@ -1,0 +1,6 @@
+name = "sharing-manager"
+display_name = "Sharing"
+icon = "icon.svg"
+priority = "user"
+program = "sharing-manager"
+stop_when_no_windows = false
