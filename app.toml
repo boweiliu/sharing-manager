@@ -4,3 +4,9 @@ icon = "icon.svg"
 priority = "user"
 program = "sharing-manager"
 stop_when_no_windows = false
+
+# How update-app boots a throwaway preview: on a free port, over scratch copies of the app's data and of the
+# policy inputs, so a preview never touches the live sharing policy.
+[preview]
+env = {SHARING_MANAGER_PORT = "{port:main}", SHARING_MANAGER_HOST = "{host}", SHARING_MANAGER_DATA_DIR = "{copy:data}", SHARING_MANAGER_INPUT_DIR = "{copy:inputs}"}
+copies = {data = "data/.apps/sharing-manager", inputs = "data/.apps/sharing-manager/source"}
