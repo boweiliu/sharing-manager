@@ -3,7 +3,10 @@
 import json
 
 import pytest
-from share_gateway.grants import load_grants, upgrade_invites_in_file
+try:
+    from share_grants.grants import load_grants, upgrade_invites_in_file
+except ImportError:  # workspaces before minds-v0.10.0 keep the grants module in the gateway
+    from share_gateway.grants import load_grants, upgrade_invites_in_file
 
 from conftest import OWNER, POLICY
 from sharing_manager import runner

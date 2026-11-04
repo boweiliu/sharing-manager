@@ -5,7 +5,7 @@ Owner-only controls for a workspace's and each app's sharing: who may open which
 Taken from the Sharing app in the fresh087 workspace (`system/apps/sharing_manager`, commit 4fe244168), whose layout and wording follow Studio's native Share tab. Differences from that copy:
 
 - Link row: besides Copy there is **Open in browser** (a new tab) and **Show QR code** (a dialog with the link drawn as a QR code, for scanning with a phone). All three are off while sharing is off or an app has no link yet.
-- Runs in the workspace's own Python environment instead of as a monorepo member: it needs `share_gateway.grants` (the lock and parser the gateway itself uses), `flask`, `pydantic` and `tomlkit`. The `app-schema` API document and `imbue-common` are not used, so there is no `/api/schema`.
+- Runs in the workspace's own Python environment instead of as a monorepo member: it needs the grants module the gateway itself uses for its lock and parser (`share_grants.grants` from minds-v0.10.0 on, `share_gateway.grants` before; it imports whichever the workspace has), `flask`, `pydantic` and `tomlkit`. The `app-schema` API document and `imbue-common` are not used, so there is no `/api/schema`.
 - Visiting agents need the `agent-access` command, which older workspaces lack. Where it is missing the section is hidden and `/api/agents` answers `available: false`.
 - The folders under the app's data are created before the gateway's atomic writer is used (older gateways only create the file).
 - `qrcode.js` in `static/` is `qrcode-generator` 2.0.4 by Kazuhiko Arase (MIT, notice kept in the file); the page draws the SVG itself from its modules.

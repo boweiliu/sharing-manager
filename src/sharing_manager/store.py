@@ -9,7 +9,10 @@ from typing import Literal
 from uuid import uuid4
 
 import tomlkit
-from share_gateway.grants import locked_grants_file, parse_grants, write_grants_atomic
+try:
+    from share_grants.grants import locked_grants_file, parse_grants, write_grants_atomic
+except ImportError:  # workspaces before minds-v0.10.0 keep the grants module in the gateway
+    from share_gateway.grants import locked_grants_file, parse_grants, write_grants_atomic
 
 PUBLIC_DOMAINS = frozenset("gmail.com googlemail.com yahoo.com yahoo.ca yahoo.co.id yahoo.co.in yahoo.co.jp yahoo.co.nz yahoo.co.uk yahoo.com.ar yahoo.com.au yahoo.com.br yahoo.com.hk yahoo.com.mx yahoo.com.ph yahoo.com.sg yahoo.com.tw yahoo.com.vn yahoo.de yahoo.dk yahoo.es yahoo.fr yahoo.gr yahoo.ie yahoo.it yahoo.nl yahoo.no yahoo.pl yahoo.se hotmail.com outlook.com live.com msn.com aol.com icloud.com me.com mac.com proton.me protonmail.com pm.me gmx.com gmx.net mail.com yandex.com zoho.com qq.com 163.com 126.com naver.com hey.com fastmail.com tuta.io".split())
 DOMAIN_PATTERN = re.compile(r"^[^\W_](?:[^\W_]|-)*(?<!-)(?:\.[^\W_](?:[^\W_]|-)*(?<!-))*\.[^\W\d_]{2,}$")

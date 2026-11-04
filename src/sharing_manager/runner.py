@@ -28,7 +28,10 @@ from typing import Literal, TypeVar
 
 from flask import Flask, Response, abort, request, send_file
 from pydantic import BaseModel, ConfigDict, Field, JsonValue, ValidationError
-from share_gateway.grants import GrantsError
+try:
+    from share_grants.grants import GrantsError
+except ImportError:  # workspaces before minds-v0.10.0 keep the grants module in the gateway
+    from share_gateway.grants import GrantsError
 from werkzeug.exceptions import HTTPException
 from werkzeug.serving import run_simple
 
